@@ -1,0 +1,22 @@
+<p id="notice"><%= flash[:notice] %></p>
+
+<h1>Add  <u><i><%=  @spell.name %></i> </u> to a Spellbook</h1>
+
+<p>
+<%= link_to "All Spells", spells_path %> | <%= link_to "Home", root_path %>    
+</p>
+
+<%= form_with(url: add_in_spell_path, local: true) do |form| %>
+
+  <div class="school_field">
+    <strong><%= form.label :books %> :</strong> <br>
+    <%= form.select(:books, options_from_collection_for_select(Book.all, :id, :name), {selected: "",disabled: "",prompt: ''}) %>
+  </div>
+  <br>
+
+  <div class="actions">
+    <%= form.submit "Add To Book"%>
+  </div>
+
+<% end %>
+

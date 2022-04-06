@@ -1,0 +1,9 @@
+<h1>Create New Spell</h1>
+
+<p>
+    Field For New Spell: <br>
+    <%= link_to 'All Spells', spells_path %> |  <%= link_to "Home", root_path %>    
+</p>  
+
+<%= render 'form', spell: @spell %>
+

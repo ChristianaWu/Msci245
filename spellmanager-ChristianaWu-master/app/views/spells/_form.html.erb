@@ -1,0 +1,63 @@
+<%= form_with(model: spell, local: true) do |form| %>
+  <% if spell.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(spell.errors.count, "error") %> prohibited this spell from being created and saved:</h2>
+
+      <ul>
+        <% spell.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+   <div class="level_field">
+    <strong><%= form.label :level %> :</strong><br>
+    <%= form.select(:level, (0..9)) %>      
+  </div>
+  <br>
+
+  <div class="name_field">
+    <strong><%= form.label :name %> :</strong> <br> 
+    <%= form.text_field :name %>
+  </div>
+  <br>
+
+  <div class="school_field">
+    <strong><%= form.label :school %> :</strong> <br>
+    <%= form.select(:school, options_for_select([["Conjuration", "Conjuration"], ["Necromancy", "Necromancy"],["Evocation", "Evocation"],
+                    ["Abjuration", "Abjuration"],["Transmutation", "Transmutation"],["Divination", "Divination"],["Enchantment", "Enchantment"],
+                    ["Illusion", "Illusion"]], :selected => form.object.school), {selected: "",disabled: "",prompt: '--select a school--'}) %>
+  </div>
+  <br>
+
+  <div class="concentration_field">
+    <strong><%= form.label :concentration %> :</strong> <br> 
+    <%= form.radio_button(:concentration, "No", :checked => true) %>
+    <%= form.label(:concentration, "No") %>
+    <%= form.radio_button(:concentration, "Yes") %>
+    <%= form.label(:concentration, "Yes") %>
+  </div>
+  <br>
+
+  <div class="spellclasses_field">
+    <strong><%= form.label :spellclasses, "Classes" %> :</strong> <br> 
+    <%# form.collection_check_boxes :spellclass_ids, Spellclass.all, :id, :class_name %>
+    <%= form.collection_check_boxes( :spellclass_ids, Spellclass.all, :id, :class_name) do |b| %>
+        <%=   b.check_box style: "display: inline"%>
+        <%=   b.label style: "display: inline" %>
+    <%  end %>
+  </div>
+  <br>
+
+  <div class="description_field">
+    <strong><%= form.label :description %> :</strong> <br> 
+    <%= form.text_field :description %>
+  </div>
+  <br>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+
+<% end %>

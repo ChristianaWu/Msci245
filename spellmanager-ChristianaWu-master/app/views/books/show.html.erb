@@ -1,0 +1,34 @@
+<p id="notice"><%= flash[:notice] %></p>
+
+<h2>
+  View  <u><i><%=  @book.name %></i> </u> 
+</h2>
+
+<p>
+<%= link_to "All Books", books_path %> | <%= link_to "Home", root_path %>    
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Spell Name</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @book.spells.each do |spell| %>
+      <tr>
+        <td><%= link_to spell.name, spell_path(spell) %></td>
+        <td><%= form_with url: remove_spell_path(@book, :removed_spell_id => spell.id), method: :delete, local: true do |f| %>
+                <%= f.submit 'Remove Spell' %>
+        <% end %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<p>
+<%= link_to "Add Spell", add_spell_book_path(@book) %>
+</p>

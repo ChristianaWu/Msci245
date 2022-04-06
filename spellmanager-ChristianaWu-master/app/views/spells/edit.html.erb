@@ -1,0 +1,12 @@
+<h1>Editing Book</h1>
+
+<p>
+<%= link_to 'All Spells', spells_path %> |  <%= link_to "Home", root_path %>    
+</p> 
+
+<%= render 'form', spell: @spell %>
+
+
+<p><%= form_with model: @spell, method: :delete, local: true do |f| %>
+    <%= f.submit 'Delete Spell' %>
+<% end %></p>

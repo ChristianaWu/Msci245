@@ -1,0 +1,31 @@
+<p id="notice"><%= flash[:notice] %></p>
+
+<h1>Add Spell to <u><i><%=  @book.name %></i></u> </h1>
+
+<p>
+<%= link_to "Back to #{@book.name}" , book_path(@book) %> | <%= link_to "Home", root_path %>    
+</p>    
+
+<table>
+  <thead>
+    <tr>
+      <th>Spell Name</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% Spell.all.order("name").each do |spell| %>
+      <tr>
+        <td><%= link_to spell.name, spell_path(spell) %></td>
+        <td><% if !@book.spell_in_book? spell.id %>
+                <%= form_with(url: add_in_book_path(@book, :added_spell_id => spell.id), local: true) do |form| %>
+                    <%= form.submit 'Add to Book' %>
+                <% end %>
+          <%else%> 
+              <div>Already in Book.</div>
+          <%end%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

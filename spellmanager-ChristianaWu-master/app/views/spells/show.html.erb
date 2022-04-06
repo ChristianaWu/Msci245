@@ -1,0 +1,45 @@
+<p id="notice"><%= flash[:notice] %></p>
+
+<h2>
+  View  <u><i><%=  @spell.name %></i></u> 
+</h2>
+
+<p>
+<%= link_to "All Spells", spells_path %> | <%= link_to "Home", root_path %>    
+</p>
+
+<p>
+  <strong>Level:</strong>
+  <%= @spell.level %>
+</p>
+
+<p>
+  <strong>School:</strong>
+  <%= @spell.school %>
+</p>
+
+<p>
+<strong>Classes:</strong>
+  <% @spell.spellcalss_array.each_with_index do |s, index| %>   
+    <% if index+1 != @spell.spellcalss_array.length %>
+        <%= s%>, 
+    <% else %>
+        <%= s%>
+    <% end %>
+  <% end %>
+</p>
+
+<p>
+<strong>Concentration:</strong>
+  <%= @spell.concentration %>   
+</p>
+
+<p>
+<strong>Description:</strong>
+  <%= @spell.description %>   
+</p>
+
+
+<p>
+<%= link_to "Add \" #{@spell.name} \" to Book", add_spell_spell_path(@spell) %>
+</p>

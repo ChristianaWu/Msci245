@@ -1,0 +1,29 @@
+<h1>Create New Spellbook</h1>
+<%= link_to "All Books" , books_path %> | <%= link_to "Home", root_path %>    
+
+<p>Field For New Spell: </p>
+
+<%= form_with(model: @book, local: true) do |form| %>
+  <% if @book.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@book.errors.count, "error") %> prohibited this book from being created and saved:</h2>
+
+      <ul>
+        <% @book.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="name_field">
+    <strong><%= form.label :name %> :</strong> <br> 
+    <%= form.text_field :name %>
+  </div>
+  <br>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+
+<% end %>
